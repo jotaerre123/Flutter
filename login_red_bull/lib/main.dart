@@ -39,77 +39,81 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.transparent,
-        body: Center(
-          child: Column(
-            children: [
-              Stack(children: <Widget>[
-                const Positioned(
-                  top: 30,
-                  right: 30,
-                  child: Text(
-                    'Skip',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold),
+        body: SizedBox(
+          width: MediaQuery.of(context).size.width,
+          child: Center(
+            child: Column(
+              children: [
+                Stack(
+                  children: <Widget>[
+                  const Positioned(
+                    top: 30,
+                    right: 30,
+                    child: Text(
+                      'Skip',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold),
+                    ),
                   ),
-                ),
-                Center(
-                  child: Column(
-                    children: [
-                      Positioned(
-                        bottom: 100,
-                        child: Image.asset(
-                          'assets/images/Red-Bull-Emblem.png',
-                          width: 300,
-                          height: 300,
+                  Center(
+                    child: Column(
+                      children: [
+                        Positioned(
+                          bottom: 100,
+                          child: Image.asset(
+                            'assets/images/Red-Bull-Emblem.png',
+                            width: 300,
+                            height: 300,
+                          ),
                         ),
-                      ),
-                      Center(
-                        child: RichText(
-                          textAlign: TextAlign.center,
-                          text: const TextSpan(
-                              text: 'Sign to get the most of\n ',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 30,
-                                  fontWeight: FontWeight.bold),
-                              children: [
-                                TextSpan(
-                                    text: 'Red Bull',
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 30))
-                              ]),
+                        Center(
+                          child: RichText(
+                            textAlign: TextAlign.center,
+                            text: const TextSpan(
+                                text: 'Sign to get the most of\n ',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 30,
+                                    fontWeight: FontWeight.bold),
+                                children: [
+                                  TextSpan(
+                                      text: 'Red Bull',
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 30))
+                                ]),
+                          ),
                         ),
-                      ),
-                      const Text(
-                          '\nCreate an account to save favorites and download\n videos to watch anytime anytime you want',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.normal,
-                          )),
-                      SignInButton(
-                        Buttons.Facebook,
-                        text: "Continue with Facebook",
-                        onPressed: () {},
-                      ),
-                      SignInButton(
-                        Buttons.Google,
-                        text: "Continue with Google",
-                        onPressed: () {},
-                      ),
-                      RichText(
-                          textAlign: TextAlign.center,
-                          text: const TextSpan(
-                              text: 'Continue with Email',
-                              style: TextStyle(color: Colors.white)))
-                    ],
-                  ),
-                )
-              ], clipBehavior: Clip.none),
-            ],
+                        const Text(
+                            '\nCreate an account to save favorites and download\n videos to watch anytime anytime you want',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.normal,
+                            )),
+                        SignInButton(
+                          Buttons.Facebook,
+                          text: "Continue with Facebook",
+                          onPressed: () {},
+                        ),
+                        SignInButton(
+                          Buttons.Google,
+                          text: "Continue with Google",
+                          onPressed: () {},
+                        ),
+                        RichText(
+                            textAlign: TextAlign.center,
+                            text: const TextSpan(
+                                text: 'Continue with Email',
+                                style: TextStyle(color: Colors.white)))
+                      ],
+                    ),
+                  )
+                ], clipBehavior: Clip.none),
+              ],
+            ),
           ),
         ));
   }

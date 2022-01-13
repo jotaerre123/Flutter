@@ -13,7 +13,6 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        
         primarySwatch: Colors.blue,
       ),
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
@@ -27,76 +26,89 @@ class MyHomePage extends StatefulWidget {
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
+
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-     final ButtonStyle style =
+    final ButtonStyle style =
         ElevatedButton.styleFrom(textStyle: const TextStyle(fontSize: 20));
 
-   
     return Scaffold(
       backgroundColor: const Color.fromRGBO(228, 51, 20, 1),
       body: Center(
-        
         child: Column(
-          
-          
           children: <Widget>[
-           Padding(
-             padding: const EdgeInsets.only(top:75.0),
-             child: Image.asset('assets/images/path_logo.png', width: 200.0, height: 100.0)
-             
-           ),
-           const Text('Beautiful, Private Sharing',style:TextStyle(color:Colors.white54, fontSize:16)),
-           
-           Padding(
-             padding: const EdgeInsets.only(top: 170.0,bottom:50.0),
-             child: SizedBox(width: 250, height: 55, child: ElevatedButton(
-              onPressed:() {},
-              style: ElevatedButton.styleFrom(
-                primary: Colors.white,
-                textStyle: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)
-              ),
-              child: const Text('Sign up', style:TextStyle(color:Colors.red))
-          )),
-           ),
-           const Text('Already have a Path account?',style:TextStyle(color:Colors.white54, fontSize:16)),
-           SizedBox(width: 250, height: 55, child: ElevatedButton(
-            onPressed:() {},
-             style: ElevatedButton.styleFrom(
-                primary: Color.fromRGBO(228, 51, 20, 1),
-                side: BorderSide(width: 2.0, color: Colors.white54,),
-                textStyle: const TextStyle(fontSize: 20, fontWeight: FontWeight.normal)
-              ),
-            child: const Text('Log in', style:TextStyle(color:Colors.white54))
-          )),
-          Padding(
-            padding: const EdgeInsets.only(top: 50),
-            child: const Text('By using Path, you agree to Path\'s', style:TextStyle(color:Colors.white54, fontSize:16)),
-          ),
-          Container(
-            color: Color.fromRGBO(228, 51, 20, 1),
-            child: Center(
-              child: RichText(
-                
-                text: TextSpan( children: <TextSpan>[TextSpan(text:'Terms of use', style:TextStyle(color:Colors.white, fontSize:16, 
-              decoration: TextDecoration.underline), recognizer: TapGestureRecognizer()..onTap = (){
-                
-              }),
-              TextSpan(text:' and', style:TextStyle(color:Colors.white54, fontSize:16)),
-
-              TextSpan(text:' Privacy Policy', style:TextStyle(color:Colors.white, fontSize:16,
-              decoration: TextDecoration.underline), recognizer: TapGestureRecognizer()..onTap = (){
-                
-              })
-              ]),
+            Padding(
+                padding: const EdgeInsets.only(top: 75.0),
+                child: Image.asset('assets/images/path_logo.png',
+                    width: 200.0, height: 100.0)),
+            const Text('Beautiful, Private Sharing',
+                style: TextStyle(color: Colors.white54, fontSize: 16)),
+            Padding(
+              padding: const EdgeInsets.only(top: 170.0, bottom: 50.0),
+              child: SizedBox(
+                  width: 250,
+                  height: 55,
+                  child: ElevatedButton(
+                      onPressed: () {},
+                      style: ElevatedButton.styleFrom(
+                          primary: Colors.white,
+                          textStyle: const TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.bold)),
+                      child: const Text('Sign up',
+                          style: TextStyle(color: Colors.red)))),
             ),
-          )
-          
-          )],
+            const Text('Already have a Path account?',
+                style: TextStyle(color: Colors.white54, fontSize: 16)),
+            SizedBox(
+                width: 250,
+                height: 55,
+                child: ElevatedButton(
+                    onPressed: () {},
+                    style: ElevatedButton.styleFrom(
+                        primary: Color.fromRGBO(228, 51, 20, 1),
+                        side: BorderSide(
+                          width: 2.0,
+                          color: Colors.white54,
+                        ),
+                        textStyle: const TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.normal)),
+                    child: const Text('Log in',
+                        style: TextStyle(color: Colors.white54)))),
+            Padding(
+              padding: const EdgeInsets.only(top: 50),
+              child: const Text('By using Path, you agree to Path\'s',
+                  style: TextStyle(color: Colors.white54, fontSize: 16)),
+            ),
+            Container(
+                color: Color.fromRGBO(228, 51, 20, 1),
+                child: Center(
+                  child: RichText(
+                    text: TextSpan(children: <TextSpan>[
+                      TextSpan(
+                          text: 'Terms of use',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 16,
+                              decoration: TextDecoration.underline),
+                          recognizer: TapGestureRecognizer()..onTap = () {}),
+                      TextSpan(
+                          text: ' and',
+                          style:
+                              TextStyle(color: Colors.white54, fontSize: 16)),
+                      TextSpan(
+                          text: ' Privacy Policy',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 16,
+                              decoration: TextDecoration.underline),
+                          recognizer: TapGestureRecognizer()..onTap = () {})
+                    ]),
+                  ),
+                ))
+          ],
         ),
       ),
     );
   }
 }
-  
