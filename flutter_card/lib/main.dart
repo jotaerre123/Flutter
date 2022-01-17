@@ -272,7 +272,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               child: Container(
                                 child: Row(
                                   children: [
-                                    Icon(
+                                    const Icon(
                                       Icons.grain_rounded,
                                       size: 15,
                                       color: Colors.blueGrey,
@@ -295,7 +295,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               child: Container(
                                 child: Row(
                                   children: [
-                                    Icon(
+                                    const Icon(
                                       Icons.ac_unit,
                                       size: 15,
                                       color: Colors.blueGrey,
@@ -318,7 +318,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               child: Container(
                                 child: Row(
                                   children: [
-                                    Icon(
+                                    const Icon(
                                       Icons.group,
                                       size: 15,
                                       color: Colors.blueGrey,
@@ -341,7 +341,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               child: Container(
                                 child: Row(
                                   children: [
-                                    Icon(
+                                    const Icon(
                                       Icons.thumb_up,
                                       size: 15,
                                       color: Colors.blueGrey,
@@ -361,8 +361,8 @@ class _MyHomePageState extends State<MyHomePage> {
                             )
                           ],
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 5),
+                        const Padding(
+                          padding: EdgeInsets.only(top: 5),
                           child: Divider(
                             color: Colors.grey,
                             thickness: 2,
@@ -375,9 +375,9 @@ class _MyHomePageState extends State<MyHomePage> {
                               child: const Text('35.000€'),
                               onPressed: () {},
                             ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 205),
-                              child: const SizedBox(width: 8),
+                            const Padding(
+                              padding: EdgeInsets.only(left: 205),
+                              child: SizedBox(width: 8),
                             ),
                             TextButton(
                               child: const Text('SELECCIONAR'),
