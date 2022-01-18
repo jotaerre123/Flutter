@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 
 import 'model/pokemon_response.dart';
 
+import 'package:http/http.dart' as http;
+
 void main() {
   runApp(const MyApp());
 }
