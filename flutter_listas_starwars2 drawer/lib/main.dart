@@ -33,6 +33,7 @@ class MyApp extends StatelessWidget {
       ),
       home: const MyHomePage(title: 'Personajes'),
     );
+
   }
 }
 
@@ -117,7 +118,8 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
       ),
-      body: Column(
+      body:
+       Column(
         children: [
           FutureBuilder<List<People>>(
             future: items,
@@ -161,9 +163,11 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Widget _peopleItem(People people, int index) {
     return Container(
+        color: Colors.blue,
         margin: const EdgeInsets.symmetric(vertical: 20.0),
         width: 150,
         child: Card(
+
           child: InkWell(
             splashColor: Colors.red.withAlpha(30),
             onTap: () {
@@ -174,13 +178,14 @@ class _MyHomePageState extends State<MyHomePage> {
               height: 150,
               child: Column(
                 children: [
-                  Text(people.name),
                   Image.network(
                     'https://starwars-visualguide.com/assets/img/characters/' +
                         (index + 1).toString() +
                         '.jpg',
-                    width: 100,
-                  )
+                    width: 300,
+                    height: 150,
+                  ),
+                  Text(people.name)
                 ],
               ),
             ),
