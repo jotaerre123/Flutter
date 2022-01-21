@@ -1,12 +1,12 @@
 
 
 import 'package:flutter/material.dart';
-import 'package:flutter_genshin_impact/model/animes_model.dart';
+
 import 'package:flutter_genshin_impact/pages/genres.dart';
 
 import 'animes.dart';
 
-import 'package:flutter/material.dart';
+
 
 import 'personajes.dart';
 
@@ -38,7 +38,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static const List<Widget> _widgetOptions = <Widget>[
-    Animes(
+    Animes(title: 'Animes',
     ),
     Genres(title: 'Genres',
 

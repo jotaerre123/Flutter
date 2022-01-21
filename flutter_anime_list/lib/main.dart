@@ -73,7 +73,7 @@ class _MyHomePageState extends State<MyHomePage> {
       routes: {
         '/': (context) => const Home(),
         '/genres': (context) => const Genres(title: 'Genres',),
-        '/animes': (context) => const Animes(),
+        '/animes': (context) => const Animes(title: 'Animes',),
         '/characters': (context) => const Personajes(),
       },
     );
