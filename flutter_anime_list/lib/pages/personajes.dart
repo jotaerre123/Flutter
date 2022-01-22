@@ -24,7 +24,7 @@ Widget build(BuildContext context) {
       // or simply save your changes to "hot reload" in a Flutter IDE).
       // Notice that the counter didn't reset back to zero; the application
       // is not restarted.
-      primarySwatch: Colors.orange,
+      primarySwatch: Colors.blue,
     ),
     home: const Personajes(title: 'Flutter Demo Home Page'),
   );
@@ -99,7 +99,7 @@ class _MyHomePageState2 extends State<Personajes> {
   }
 
   Future<List<CharactersData>> fetchPlanets() async {
-    final response = await http.get(Uri.parse('https://api.jikan.moe/v4/characters?order_by=mal_id&sort=asc&q=Vegeta'));
+    final response = await http.get(Uri.parse('https://api.jikan.moe/v4/characters?order_by=mal_id&sort=desc&page=2'));
     if (response.statusCode == 200) {
       return CharactersModel.fromJson(jsonDecode(response.body)).data;
     } else {

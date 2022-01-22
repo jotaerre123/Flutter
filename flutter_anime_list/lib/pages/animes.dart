@@ -98,7 +98,7 @@ class _MyHomePageState2 extends State<Animes> {
   }
 
   Future<List<AnimesData>> fetchPlanets() async {
-    final response = await http.get(Uri.parse('https://api.jikan.moe/v4/anime?q=Dragon Ball'));
+    final response = await http.get(Uri.parse('https://api.jikan.moe/v4/anime?status=airing&type=tv&rating=pg13&page=2'));
     if (response.statusCode == 200) {
       return AnimesModel.fromJson(jsonDecode(response.body)).data;
     } else {

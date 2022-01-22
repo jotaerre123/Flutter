@@ -86,7 +86,7 @@ class _MyHomePageState2 extends State<Mangas> {
   }
 
   Future<List<MangasData>> fetchPlanets() async {
-    final response = await http.get(Uri.parse('https://api.jikan.moe/v4/manga?order_by=mal_id&score=5&type=manga&q=Dragon Ball'));
+    final response = await http.get(Uri.parse('https://api.jikan.moe/v4/manga?type=manga&order_by=mal_id&sort=desc&q=JoJo no '));
     if (response.statusCode == 200) {
       return MangasModel.fromJson(jsonDecode(response.body)).data;
     } else {
