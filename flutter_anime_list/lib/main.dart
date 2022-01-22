@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_genshin_impact/pages/home.dart';
-import 'package:flutter_genshin_impact/pages/genres.dart';
+import 'package:flutter_genshin_impact/pages/mangas.dart';
 import 'package:flutter_genshin_impact/pages/personajes.dart';
 import 'package:flutter_genshin_impact/pages/animes.dart';
 
@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
         // or simply save your changes to "hot reload" in a Flutter IDE).
         // Notice that the counter didn't reset back to zero; the application
         // is not restarted.
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.orange,
       ),
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
@@ -72,9 +72,9 @@ class _MyHomePageState extends State<MyHomePage> {
       initialRoute: '/',
       routes: {
         '/': (context) => const Home(),
-        '/genres': (context) => const Genres(title: 'Genres',),
+        '/genres': (context) => const Mangas(title: 'Genres',),
         '/animes': (context) => const Animes(title: 'Animes',),
-        '/characters': (context) => const Personajes(),
+        '/characters': (context) => const Personajes(title: 'Personajes',),
       },
     );
   }

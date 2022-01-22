@@ -1,8 +1,9 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:flutter_genshin_impact/model/manga_model.dart';
 
-import 'package:flutter_genshin_impact/pages/genres.dart';
+import 'package:flutter_genshin_impact/pages/mangas.dart';
 
 import 'animes.dart';
 
@@ -40,10 +41,10 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   static const List<Widget> _widgetOptions = <Widget>[
     Animes(title: 'Animes',
     ),
-    Genres(title: 'Genres',
+    Mangas(title: 'Mangas',
 
     ),
-    Personajes(
+    Personajes(title: 'Personajes',
       
     ),
     
@@ -59,6 +60,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.orange,
         title: const Text('BottomNavigationBar Sample'),
       ),
       body: Center(
@@ -67,16 +69,17 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.home,),
-            label: 'Home',
+            icon: Icon(Icons.tv,),
+            label: 'Anime',
+            
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.business),
-            label: 'Business',
+            icon: Icon(Icons.book),
+            label: 'Manga',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.school),
-            label: 'School',
+            icon: Icon(Icons.emoji_people_outlined),
+            label: 'Characters',
           ),
         ],
         currentIndex: _selectedIndex,

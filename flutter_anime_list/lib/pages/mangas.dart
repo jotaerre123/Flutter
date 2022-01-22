@@ -1,9 +1,9 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:flutter_genshin_impact/model/genres_model.dart';
+import 'package:flutter_genshin_impact/model/manga_model.dart';
 import 'package:http/http.dart' as http;
 
-late Future<List<GenresData>> items;
+late Future<List<MangasData>> items;
 
 
 
@@ -24,12 +24,12 @@ Widget build(BuildContext context) {
       // is not restarted.
       primarySwatch: Colors.blue,
     ),
-    home: const Genres(title: 'Flutter Demo Home Page'),
+    home: const Mangas(title: 'Flutter Demo Home Page'),
   );
 }
 
-class Genres extends StatefulWidget {
-  const Genres({Key? key, required this.title}) : super(key: key);
+class Mangas extends StatefulWidget {
+  const Mangas({Key? key, required this.title}) : super(key: key);
 
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
@@ -43,11 +43,11 @@ class Genres extends StatefulWidget {
   final String title;
 
   @override
-  State<Genres> createState() => _MyHomePageState2();
+  State<Mangas> createState() => _MyHomePageState2();
 }
 
-class _MyHomePageState2 extends State<Genres> {
-  late Future<List<GenresData>> items;
+class _MyHomePageState2 extends State<Mangas> {
+  late Future<List<MangasData>> items;
   
 
   @override
@@ -61,7 +61,7 @@ class _MyHomePageState2 extends State<Genres> {
     return Scaffold(
       body: Column(
         children: [
-          FutureBuilder<List<GenresData>>(
+          FutureBuilder<List<MangasData>>(
             future: items,
             builder: (context, snapshot) {
               if (snapshot.hasData) {
@@ -80,29 +80,21 @@ class _MyHomePageState2 extends State<Genres> {
 
  
 
-  Widget _getPlanetImg(int index, String name) {
-    if (name == 'Tatooine') {
-      return Image.network(
-          'https://static.wikia.nocookie.net/esstarwars/images/b/b0/Tatooine_TPM.png/revision/latest?cb=20131214162357');
-    } else {
-      return Image.network(
-          'https://starwars-visualguide.com/assets/img/planets/' +
-              (index + 1).toString() +
-              '.jpg',
-          width: 100);
-    }
+  Widget _getPlanetImg(MangasData img) {
+    
+      return Image.network(img.images.jpg.imageUrl, fit: BoxFit.cover,);
   }
 
-  Future<List<GenresData>> fetchPlanets() async {
-    final response = await http.get(Uri.parse('https://api.jikan.moe/v4/genres/anime'));
+  Future<List<MangasData>> fetchPlanets() async {
+    final response = await http.get(Uri.parse('https://api.jikan.moe/v4/manga?order_by=mal_id&score=5&type=manga&q=Dragon Ball'));
     if (response.statusCode == 200) {
-      return GenresModel.fromJson(jsonDecode(response.body)).data;
+      return MangasModel.fromJson(jsonDecode(response.body)).data;
     } else {
       throw Exception('Failed to load planets');
     }
   }
 
-  Widget _planetsList(List<GenresData> planetsList) {
+  Widget _planetsList(List<MangasData> planetsList) {
     return SizedBox(
       height: 600,
       width: MediaQuery.of(context).size.width,
@@ -116,7 +108,7 @@ class _MyHomePageState2 extends State<Genres> {
     );
   }
 
-  Widget _planetItem(GenresData planet, int index) {
+  Widget _planetItem(MangasData planet, int index) {
     return Container(
         margin: const EdgeInsets.symmetric(vertical: 20.0),
         width: 150,
@@ -127,12 +119,12 @@ class _MyHomePageState2 extends State<Genres> {
               debugPrint('Card tapped.');
             },
             child: SizedBox(
-              width: 300,
-              height: 150,
+              width: 30,
+              height: 400,
               child: Column(
                 children: [
-                  Text(planet.name)
-                  
+                  Text(planet.title),
+                  _getPlanetImg(planet)
                 ],
               ),
             ),

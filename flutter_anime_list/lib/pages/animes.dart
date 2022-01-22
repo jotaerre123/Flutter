@@ -2,10 +2,9 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_genshin_impact/model/animes_model.dart';
-import 'package:flutter_genshin_impact/model/genres_model.dart';
+import 'package:flutter_genshin_impact/model/manga_model.dart';
 import 'package:http/http.dart' as http;
 
-late Future<List<GenresData>> items;
 
 
 
@@ -64,15 +63,26 @@ class _MyHomePageState2 extends State<Animes> {
       body: Column(
         children: [
           FutureBuilder<List<AnimesData>>(
-            future: items,
+            future: fetchPlanets(),
             builder: (context, snapshot) {
-              if (snapshot.hasData) {
+              /*if (snapshot.hasData) {
                 return _planetsList(snapshot.data!);
               } else if (snapshot.hasError) {
                 return Text('${snapshot.error}');
-              }
+              }*/
+              switch (snapshot.connectionState) {
+          case ConnectionState.none:
+          case ConnectionState.waiting:
+            return new Text('loading...');
+          default:
+            if (snapshot.hasError)
+              return new Text('Error: ${snapshot.error}');
+            else {
+              return _planetsList(context, snapshot);
+            }
+        }
 
-              return const Center(child: CircularProgressIndicator());
+             /* return const Center(child: CircularProgressIndicator());*/
             },
           )
         ],
@@ -88,7 +98,7 @@ class _MyHomePageState2 extends State<Animes> {
   }
 
   Future<List<AnimesData>> fetchPlanets() async {
-    final response = await http.get(Uri.parse('https://api.jikan.moe/v4/top/anime?page=10'));
+    final response = await http.get(Uri.parse('https://api.jikan.moe/v4/anime?q=Dragon Ball'));
     if (response.statusCode == 200) {
       return AnimesModel.fromJson(jsonDecode(response.body)).data;
     } else {
@@ -96,15 +106,16 @@ class _MyHomePageState2 extends State<Animes> {
     }
   }
 
-  Widget _planetsList(List<AnimesData> planetsList) {
+  Widget _planetsList(BuildContext planetsList, AsyncSnapshot<List<AnimesData>> snapshot) {
+    List<AnimesData>? values = snapshot.data;
     return SizedBox(
       height: 600,
       width: MediaQuery.of(context).size.width,
       child: ListView.builder(
         scrollDirection: Axis.vertical,
-        itemCount: planetsList.length,
+        itemCount: values?.length,
         itemBuilder: (context, index) {
-          return _planetItem(planetsList.elementAt(index), index);
+          return _planetItem(values![index], index);
         },
       ),
     );
