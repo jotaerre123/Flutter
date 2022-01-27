@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_popcorn_homepage/models/movies_model.dart';
+import 'package:flutter_popcorn_homepage/models/now_playing_model.dart';
 import 'package:http/http.dart' as http;
 @override
 Widget build(BuildContext context) {
@@ -53,33 +54,72 @@ class _MyHomePageState2 extends State<Movies> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
-        children: [
-          FutureBuilder<List<MoviesData>>(
-            future: fetchPlanets(),
-            builder: (context, snapshot) {
-              /*if (snapshot.hasData) {
-                return _planetsList(snapshot.data!);
-              } else if (snapshot.hasError) {
-                return Text('${snapshot.error}');
-              }*/
-              switch (snapshot.connectionState) {
-          case ConnectionState.none:
-          case ConnectionState.waiting:
-            return new Text('loading...');
-          default:
-            if (snapshot.hasError)
-              return new Text('Error: ${snapshot.error}');
-            else {
-              return _planetsList(context, snapshot);
-            }
-        }
+    return Container(
+      width: 300,
+      height: 430,
+      child: Scaffold(
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            FutureBuilder<List<NowData>>(
+              future: fetchNowPlaying(),
+              builder: (context, snapshot) {
+                /*if (snapshot.hasData) {
+                  return _planetsList(snapshot.data!);
+                } else if (snapshot.hasError) {
+                  return Text('${snapshot.error}');
+                }*/
+                switch (snapshot.connectionState) {
+            case ConnectionState.none:
+            case ConnectionState.waiting:
+              return new Text('loading...');
+            default:
+              if (snapshot.hasError)
+                return new Text('Error: ${snapshot.error}');
+              else {
+                return _planetsNow(context, snapshot);
+              }
+          }
 
-             /* return const Center(child: CircularProgressIndicator());*/
-            },
-          )
-        ],
+               /* return const Center(child: CircularProgressIndicator());*/
+              },
+            ),
+
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Text('Popular Movies',
+                            textAlign: TextAlign.left,
+                            style: TextStyle(
+                                fontSize: 14, fontWeight: FontWeight.bold)),
+              ],
+            ),
+
+          FutureBuilder<List<MoviesData>>(
+              future: fetchPlanets(),
+              builder: (context, snapshot) {
+                /*if (snapshot.hasData) {
+                  return _planetsList(snapshot.data!);
+                } else if (snapshot.hasError) {
+                  return Text('${snapshot.error}');
+                }*/
+                switch (snapshot.connectionState) {
+            case ConnectionState.none:
+            case ConnectionState.waiting:
+              return new Text('loading...');
+            default:
+              if (snapshot.hasError)
+                return new Text('Error: ${snapshot.error}');
+              else {
+                return _planetsList(context, snapshot);
+              }
+          }
+
+               /* return const Center(child: CircularProgressIndicator());*/
+              },
+            )
+          ],
+        ),
       ),
     );
   }
@@ -88,7 +128,11 @@ class _MyHomePageState2 extends State<Movies> {
 
   Widget _getPlanetImg(MoviesData index) {
     
-      return Image.network('https://image.tmdb.org/t/p/w200${index.posterPath}', width: 100,);
+      return Image.network('https://image.tmdb.org/t/p/w200${index.posterPath}', width: 75,);
+  }
+  Widget _getPlanetImg2(NowData index) {
+    
+      return Image.network('https://image.tmdb.org/t/p/w200${index.posterPath}', width: 75,);
   }
 
   Future<List<MoviesData>> fetchPlanets() async {
@@ -100,10 +144,19 @@ class _MyHomePageState2 extends State<Movies> {
     }
   }
 
+  Future<List<NowData>> fetchNowPlaying() async {
+    final response = await http.get(Uri.parse('https://api.themoviedb.org/3/movie/now_playing?api_key=053f86677318d3a54251905c00fd7a09&language=en-US&page=1'));
+    if (response.statusCode == 200) {
+      return NowModel.fromJson(jsonDecode(response.body)).results;
+    } else {
+      throw Exception('Failed to load planets');
+    }
+  }
+
   Widget _planetsList(BuildContext planetsList, AsyncSnapshot<List<MoviesData>> snapshot) {
     List<MoviesData>? values = snapshot.data;
     return SizedBox(
-      height: 230,
+      height: 200,
       width: MediaQuery.of(context).size.width,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
@@ -118,8 +171,7 @@ class _MyHomePageState2 extends State<Movies> {
   Widget _planetItem(MoviesData planet, int index) {
     return Container(
         margin: const EdgeInsets.symmetric(vertical: 20.0),
-        width: 200,
-        height: 250,
+        width: 150,
         child: Card(
           child: InkWell(
             splashColor: Colors.red.withAlpha(30),
@@ -127,12 +179,52 @@ class _MyHomePageState2 extends State<Movies> {
               debugPrint('Card tapped.');
             },
             child: SizedBox(
-              width: 30,
-              height: 100,
+              width: 150,
+              height: 150,
               child: Column(
                 children: [
-                  Text(planet.title),
+                  Text(planet.title, style: TextStyle(fontSize: 11), overflow: TextOverflow.ellipsis),
                   _getPlanetImg(planet),
+                  Text(planet.voteAverage.toString())
+                ],
+              ),
+            ),
+          ),
+        ));
+  }
+
+  Widget _planetsNow(BuildContext planetsList, AsyncSnapshot<List<NowData>> snapshot) {
+    List<NowData>? values = snapshot.data;
+    return SizedBox(
+      height: 200,
+      width: MediaQuery.of(context).size.width,
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        itemCount: values?.length,
+        itemBuilder: (context, index) {
+          return _planetItemNow(values![index], index);
+        },
+      ),
+    );
+  }
+
+  Widget _planetItemNow(NowData planet, int index) {
+    return Container(
+        margin: const EdgeInsets.symmetric(vertical: 20.0),
+        width: 150,
+        child: Card(
+          child: InkWell(
+            splashColor: Colors.red.withAlpha(30),
+            onTap: () {
+              debugPrint('Card tapped.');
+            },
+            child: SizedBox(
+              width: 300,
+              height: 150,
+              child: Column(
+                children: [
+                  Text(planet.title, style: TextStyle(fontSize: 11),overflow: TextOverflow.ellipsis,),
+                  _getPlanetImg2(planet),
                   Text(planet.voteAverage.toString())
                 ],
               ),
