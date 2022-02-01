@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 import 'pages/home.dart';
+import 'pages/movie_detail.dart';
 import 'pages/movies_page.dart';
+import 'pages/now_playing_detail.dart';
 
 void main() {
   runApp(const MyApp());
@@ -61,7 +63,9 @@ class _MyHomePageState extends State<MyHomePage> {
     return MaterialApp(initialRoute: '/',
     routes: {
       '/':  (context) => const Home(),
-      '/movies': (context) => const Movies(title: 'Movies',)
+      '/movies': (context) => const Movies(title: 'Movies'),
+      '/details_popular': (context) => const MovieDetailsPage(),
+      '/details_now': (context) => const NowDetailsPage()
     },
 
     );

@@ -176,7 +176,7 @@ class _MyHomePageState2 extends State<Movies> {
           child: InkWell(
             splashColor: Colors.red.withAlpha(30),
             onTap: () {
-              debugPrint('Card tapped.');
+               Navigator.pushNamed(context, '/details_popular', arguments: planet);
             },
             child: SizedBox(
               width: 150,
@@ -216,7 +216,7 @@ class _MyHomePageState2 extends State<Movies> {
           child: InkWell(
             splashColor: Colors.red.withAlpha(30),
             onTap: () {
-              debugPrint('Card tapped.');
+              Navigator.pushNamed(context, '/details_now', arguments: planet);
             },
             child: SizedBox(
               width: 300,
